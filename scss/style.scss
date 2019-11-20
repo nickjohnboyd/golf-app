@@ -1,3 +1,5 @@
+@import "_global";
+
 body {
     margin: 0;
     padding: 0;
@@ -7,26 +9,68 @@ body {
 
 .home {
 
-    .all-courses {
+    .header {
         display: flex;
-        flex-direction: column;
-        align-items: center;
         justify-content: center;
+        align-items: center;
+        height: 50px;
+        background-color: #03c03c;
 
-        .course {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 20px;
-            border: 2px solid black;
-
-            .course-name {
-                font-size: 20px;
-            }
-            .course-image {
-                width: 270px;
-            }
+        .title {
+            font-size: 22px;
         }
     }
+    .content {
+        padding: 0 18px 18px 18px;
+
+        .all-courses {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .course-prompt {
+                padding: 10px;
+            }
+            .course-cont {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 22px;
+
+                .course {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: $light-grey;
+                    border-radius: 5px;
+                    overflow: hidden;
+        
+                    .course-name {
+                        font-size: 20px;
+                        padding: 5px 0;
+                    }
+                    .course-image {
+                        width: 260px;
+                    }
+                }
+                .tee-types {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    // display: none;
+    
+                    .tee-type-select {
+                        
+                    }
+                }
+            }
+    
+            
+        }
+    }
+    
 }
