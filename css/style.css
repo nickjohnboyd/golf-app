@@ -40,8 +40,28 @@ body {
           padding: 5px 0; }
         .home .content .all-courses .course-cont .course .course-image {
           width: 260px; }
-      .home .content .all-courses .course-cont .tee-types {
+      .home .content .all-courses .course-cont .course-options {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100%; }
+        width: 100%;
+        margin-top: 10px;
+        display: none; }
+        .home .content .all-courses .course-cont .course-options .empty-select-alert {
+          display: none;
+          font-size: 15px; }
+          .home .content .all-courses .course-cont .course-options .empty-select-alert .alert {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; }
+        .home .content .all-courses .course-cont .course-options .tee-type-select {
+          text-transform: capitalize;
+          margin-bottom: 7px; }
+        .home .content .all-courses .course-cont .course-options .num-players-select {
+          width: 100%;
+          margin-bottom: 15px; }
+        .home .content .all-courses .course-cont .course-options .build-card-btn {
+          width: 100%; }
+  .home .content .scorecard {
+    display: flex; }

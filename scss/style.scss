@@ -56,21 +56,46 @@ body {
                         width: 260px;
                     }
                 }
-                .tee-types {
+                .course-options {
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     width: 100%;
-                    // display: none;
-    
-                    .tee-type-select {
-                        
+                    margin-top: 10px;
+                    display: none;
+
+                    .empty-select-alert{
+                        display: none;
+                        font-size: 15px;
+
+                        .alert {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                    }  
+                    .tee-type-select{
+                        text-transform: capitalize;
+                        margin-bottom: 7px;
+                        // background-color: red;
+
+                    }
+                    .num-players-select {
+                        width: 100%;
+                        margin-bottom: 15px;
+                    }
+                    .build-card-btn {
+                        width: 100%;
                     }
                 }
             }
-    
             
         }
-    }
-    
+
+        .scorecard{
+            display: flex;
+
+        }
+    }  
 }
