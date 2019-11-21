@@ -92,45 +92,135 @@ function showCourseOptions(id) {
     $(`#${id}`).find(".course-options").slideToggle();
 }
 
+
+
+
 function buildScorecard(id) {
     let teeType = $(`#${id}`).find(".tee-type-select").val();
     let numPlayers = $(`#${id}`).find(".num-players-select").val();
+
     if(teeType == "empty" || numPlayers == "empty"){
         console.log("empty alert");
         $(`#${id}`).find(".empty-select-alert").slideDown();
         return;
     }
-    console.log(teeType);
-    console.log(numPlayers);
 
     $(".content").html("");
     $(".content").append(`
         <div class="scorecard">
             <div class="row-titles">
-                <div class="hole-title">Hole</div>
-                <div class="tee-type-yards">
-                    <div class="tee-title">${teeType}</div>
-                </div>
-                <div class="handicap">
-                    <div class="hcp-title">Handicap</div>
-                </div>
+                <div class="row-title col-item">HOLE</div>
+                <div class="row-title col-item tee-title">${teeType}</div>
+                <div class="row-title col-item">Handicap</div>
                 <div class="players"></div>
-                <div class="par">
-                    <div class="par-title">Par</div>
-                </div>                
+                <div class="row-title col-item">Par</div>
             </div>
         </div>
-    `);   
+    `); 
 
+    replaceHeaderName(id);
+
+    buildCol(id, numPlayers);
+
+    buildPlayers(numPlayers);
+
+}
+
+
+
+function buildCol(id, numPlayers) {
     getCourse(id).then(() => {
         console.log(selectedCourse);
+
         for(let i = 0; i < selectedCourse.data.holes.length; i++) {
             if(i == 9) {
+                $(".scorecard").append(`
+                    <div class="column out-col">
+                        <div class="out-title col-item">OUT</div>
+                    </div>
+                `);
+                buildMidColItems(selectedCourse);
+            }
 
-            }
-            for(let j = 0; j < numPlayers.length; j++) {
-                
-            }
+            $(".scorecard").append(`
+                <div class="column" id="col${i}">
+                    <div class="hole-num col-item">${i}</div> 
+                </div
+            `)
+            buildColItems(selectedCourse, i, numPlayers);
         }
+
+        $(".scorecard").append(`
+            <div class="column in-col">
+                <div class="in-title col-item">IN</div>
+            </div>       
+        `);
+        buildEndColItems(selectedCourse);
+    })
+}
+
+function buildColItems(selectedCourse, colNum, numPlayers) {
+    let theHole = selectedCourse.data.holes[colNum].teeBoxes[0];
+
+    $(`#col${colNum}`).append(`
+        <div class="tee-yards col-item">${theHole.yards}</div>
+        <div class="hcp col-item">${theHole.hcp}</div>
+        <div class="score-input"></div>
+        <div class="hcp col-item">${theHole.par}</div>
+    `);
+
+    for(let i = 0; i < numPlayers; i++) {
+        $(`#col${colNum}`).find(".score-input").append(`
+            <div class="score col-item">box</div>
+        `)
+    }
+}
+
+function buildMidColItems(selectedCourse) {
+    let totalOutYards = 0;
+    for(let i = 0; i < 8; i++) {
+        let theHole = selectedCourse.data.holes[i].teeBoxes[0];
+        totalOutYards += theHole.yards;
+    }
+
+    $(".out-col").append(`
+        <div class="col-item">${totalOutYards}</div>
+        <div class="col-item"></div>
+        <div class="out-total col-item">out</div>
+        <div class="col-item">36</div>
+    `);
+
+}
+
+
+
+function buildPlayers(numPlayers) {
+    for(let i = 0; i < numPlayers; i++) {
+        $(".players").append(`
+            <div class="player" id="player${i}">
+                <input class="name-input col-item" type="text" onkeyup="addPlayerName(event, this.value, ${i})">
+            </div>
+        `)
+    }
+}
+
+function addPlayerName(event, name, i) {
+    switch(event.which) {
+        case 13:
+            if(name == ""){
+                break;
+            }
+            $(`#player${i}`).html("");
+            $(`#player${i}`).append(`
+                <div class="row-title col-item">${name}</div>
+            `);
+            $(`#player${i + 1}`).find(".name-input").focus();            
+            break;
+    }
+}
+
+function replaceHeaderName(id) {
+    getCourse(id).then(() => {
+        $(".head-title").text(selectedCourse.data.name);
     })
 }

@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Montserrat', sans-serif; }
+  font-family: 'Nunito', sans-serif; }
 
 .home .header {
   display: flex;
@@ -9,10 +9,12 @@ body {
   align-items: center;
   height: 50px;
   background-color: #03c03c; }
-  .home .header .title {
+  .home .header .head-title {
     font-size: 22px; }
 
 .home .content {
+  display: flex;
+  justify-content: center;
   padding: 0 18px 18px 18px; }
   .home .content .all-courses {
     display: flex;
@@ -64,4 +66,17 @@ body {
         .home .content .all-courses .course-cont .course-options .build-card-btn {
           width: 100%; }
   .home .content .scorecard {
-    display: flex; }
+    display: flex;
+    margin-top: 20px; }
+    .home .content .scorecard .col-item {
+      padding: 10px;
+      height: 50px;
+      width: 50px;
+      border: 1px solid black;
+      text-align: center; }
+    .home .content .scorecard .row-title {
+      font-weight: 700;
+      text-align: left;
+      width: 190px; }
+    .home .content .scorecard .tee-title {
+      text-transform: capitalize; }
