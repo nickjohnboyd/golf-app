@@ -14,11 +14,15 @@ body {
 
 .home .content {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 30px; }
+  .home .content .add-player {
+    width: 1373px; }
   .home .content .card-cont {
     display: flex;
     justify-content: center;
-    padding: 0 18px 18px 18px; }
+    padding: 0px 18px 18px 18px; }
   .home .content .all-courses {
     display: flex;
     flex-direction: column;
@@ -70,7 +74,7 @@ body {
           width: 100%; }
   .home .content .scorecard {
     display: flex;
-    margin-top: 40px;
+    margin-top: 15px;
     font-size: 15px;
     border: 1px solid black; }
     .home .content .scorecard .col-item {

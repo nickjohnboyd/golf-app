@@ -50,7 +50,7 @@ function buildCourses() {
                         <option value="3">3</option>
                         <option value="4">4</option>
                     </select>
-                    <button class="btn btn-dark build-card-btn" onclick="buildScorecard(${theCourse.id})">Build Scorecard</button>
+                    <button class="btn btn-dark build-card-btn" onclick="buildInitialCard(${theCourse.id})">Build Scorecard</button>
                 </div>               
             </div>
         `);
@@ -95,9 +95,15 @@ function showCourseOptions(id) {
 
 
 
-function buildScorecard(id) {
-    let teeType = $(`#${id}`).find(".tee-type-select").val();
+
+function buildInitialCard(id) {
     let numPlayers = $(`#${id}`).find(".num-players-select").val();
+
+    buildScorecard(id, numPlayers)
+}
+
+function buildScorecard(id, numPlayers) {
+    let teeType = $(`#${id}`).find(".tee-type-select").val();
 
     if(teeType == "empty" || numPlayers == "empty"){
         $(`#${id}`).find(".empty-select-alert").slideDown();
@@ -107,7 +113,7 @@ function buildScorecard(id) {
     $(".content").html("");
     $(".content").append(`
         <div class="add-player">
-            <button class="add-player-btn btn btn-dark" onclick="addPlayer(${numPlayers})">Add Player</div>
+            <button class="add-player-btn btn btn-dark" onclick="addPlayer(${id}, ${numPlayers})">Add Player</div>
         <div class="card-cont">
             <div class="scorecard">
                 <div class="row-titles">
@@ -215,7 +221,7 @@ function buildColItems(selectedCourse, colNum, numPlayers) {
     for(let i = 0; i < numPlayers; i++) {
         $(`#col${colNum}`).find(".score-input").append(`
             <div class="score">
-                <input type="text" class="score-input col-item score${i}" id="col${colNum}p${i}" onchange="addScore(event, this.value, ${colNum}, ${i})" placeholder="" maxlength="2">
+                <input type="text" class="score-input col-item score${i}" id="col${colNum}p${i}" onchange="addScore(this.value, ${colNum}, ${i})" placeholder="" maxlength="2">
             </div>
         `)
     }
@@ -338,14 +344,22 @@ function addPlayerName(name, i, numPlayers) {
     $(`#player${i}`).html("");
     $(`#player${i}`).append(`
         <div class="row-title col-item">
-            <div class="col-item-text player-name">${name}</div>                
+            <div class="col-item-text player-name">${name}</div>           
         </div>
     `);
     $(`#player${i + 1}`).find(".name-input").focus();
 }
 
-function addPlayer() {
-    
+function addPlayer(id, numPlayers) {
+    numPlayers++;
+    $(".players").append(`
+        <div class="player" id="player${numPlayers}">
+            <input class="name-input col-item" type="text" placeholder="Add Player Name" onchange="addPlayerName(this.value, ${numPlayers}, ${numPlayers})">
+        </div>
+    `);
+
+    $(".content").html("");
+    buildScorecard(id, numPlayers);
 }
 
 function replaceHeaderName(id) {
@@ -355,9 +369,12 @@ function replaceHeaderName(id) {
 }
 
 function addScore(score, colNum, player) {
+    console.log("add score");
+    console.log("score " + score);
     if(score == "" || isNaN(Number(score))){
         return;
     }
+    console.log(score);
     $(`#col${colNum}p${player}`).val(score);
     setAllScores(player);
     $(`#col${colNum}`).find(`.score${player + 1}`).focus();
