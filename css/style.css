@@ -17,12 +17,14 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 40px; }
+  padding-top: 50px; }
   .home .content .scorecard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 1373px; }
+    .home .content .scorecard-header .add-player-btn {
+      font-size: 15px; }
     .home .content .scorecard-header .end-message .end-msg-text {
       padding: 5px 15px;
       border-radius: 5px; }
@@ -87,9 +89,9 @@ body {
           width: 100%; }
   .home .content .scorecard {
     display: flex;
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: 15px;
-    border: 1px solid black; }
+    border: 1px solid #000000; }
     .home .content .scorecard .col-item {
       display: flex;
       justify-content: center;
@@ -97,7 +99,7 @@ body {
       padding: 7px;
       height: 53px;
       width: 53px;
-      border: 1px solid black; }
+      border: 1px solid #000000; }
     .home .content .scorecard .row-title {
       display: flex;
       justify-content: flex-start;
@@ -121,7 +123,7 @@ body {
       height: 159px;
       font-size: 12px;
       font-weight: bold;
-      border: 1px solid black;
+      border: 1px solid #000000;
       width: 40px; }
     .home .content .scorecard .initials-cont {
       display: flex;
@@ -131,9 +133,17 @@ body {
       text-align: center;
       width: 40px;
       height: 53px;
-      border: 1px solid black;
+      border: 1px solid #000000;
       padding: 7px; }
     .home .content .scorecard .score-input {
       text-align: center; }
     .home .content .scorecard .par {
       background-color: #e1ad01; }
+    .home .content .scorecard .pro {
+      background-color: #443C30; }
+    .home .content .scorecard .champion {
+      background-color: #6e869e; }
+    .home .content .scorecard .men {
+      background-color: #ffffff; }
+    .home .content .scorecard .women {
+      background-color: #ff0000; }

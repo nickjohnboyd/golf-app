@@ -4,10 +4,6 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Montserrat', sans-serif;
-    // font-family: 'Public Sans', sans-serif;
-    // font-family: 'Nunito', sans-serif;
-    // overflow: auto;
-    // white-space: nowrap;
 }
 
 .home {
@@ -28,7 +24,7 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding-top: 40px;
+        padding-top: 50px;
 
         .scorecard-header {
             display: flex;
@@ -36,6 +32,9 @@ body {
             align-items: center;
             width: 1373px;
 
+            .add-player-btn {
+                font-size: 15px;
+            }
             .end-message {
 
                 .end-msg-text {
@@ -115,7 +114,6 @@ body {
                     .tee-type-select{
                         text-transform: capitalize;
                         margin-bottom: 7px;
-                        // background-color: red;
 
                     }
                     .num-players-select {
@@ -132,9 +130,9 @@ body {
 
         .scorecard{
             display: flex;
-            margin-top: 15px;
+            margin-top: 20px;
             font-size: 15px;
-            border: 1px solid black;
+            border: 1px solid $black;
 
             .col-item {
                 display: flex;
@@ -143,7 +141,7 @@ body {
                 padding: 7px;
                 height: 53px;
                 width: 53px;
-                border: 1px solid black;
+                border: 1px solid $black;
             }
             .row-title {
                 display: flex;
@@ -174,7 +172,7 @@ body {
                 height: 159px;
                 font-size: 12px;
                 font-weight: bold;
-                border: 1px solid black;
+                border: 1px solid $black;
                 width: 40px;
             }
             .initials-cont {
@@ -186,7 +184,7 @@ body {
                 text-align: center;
                 width: 40px;
                 height: 53px;
-                border: 1px solid black;
+                border: 1px solid $black;
                 padding: 7px;
             }
             .score-input {
@@ -195,7 +193,21 @@ body {
             .par {
                 background-color: #e1ad01;
             }
-
+            .pro {
+                background-color: #443C30;
+                // background-color: #696c7d;
+            }
+            .champion {
+                background-color: #6e869e;
+            }
+            .men {
+                background-color: #ffffff;
+                // background-color: #38acff;
+            }
+            .women {
+                background-color: #ff0000;
+                // background-color: #844fff;
+            }
         }
     }  
 }
