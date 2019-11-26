@@ -7,7 +7,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
+  height: 70px;
   background-color: #03c03c; }
   .home .header .head-title {
     font-size: 22px; }
@@ -67,16 +67,49 @@ body {
           width: 100%; }
   .home .content .scorecard {
     display: flex;
-    margin-top: 20px; }
+    margin-top: 40px;
+    font-size: 15px;
+    border: 1px solid black; }
     .home .content .scorecard .col-item {
-      padding: 10px;
-      height: 50px;
-      width: 50px;
-      border: 1px solid black;
-      text-align: center; }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 7px;
+      height: 53px;
+      width: 53px;
+      border: 1px solid black; }
     .home .content .scorecard .row-title {
+      display: flex;
+      justify-content: flex-start;
       font-weight: 700;
-      text-align: left;
-      width: 190px; }
+      width: 188px; }
     .home .content .scorecard .tee-title {
       text-transform: capitalize; }
+    .home .content .scorecard .name-input {
+      width: 188px; }
+    .home .content .scorecard .out-col .col-item {
+      width: 68px; }
+    .home .content .scorecard .in-col .col-item {
+      width: 68px; }
+    .home .content .scorecard .initials-title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 159px;
+      font-size: 12px;
+      font-weight: bold;
+      border: 1px solid black;
+      width: 40px; }
+    .home .content .scorecard .initials-cont {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    .home .content .scorecard .initials-input, .home .content .scorecard .initials-empty {
+      text-align: center;
+      width: 40px;
+      height: 53px;
+      border: 1px solid black;
+      padding: 7px; }
+    .home .content .scorecard .score-input {
+      text-align: center; }

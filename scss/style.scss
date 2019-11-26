@@ -14,7 +14,7 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 50px;
+        height: 70px;
         background-color: #03c03c;
 
         .head-title {
@@ -98,22 +98,63 @@ body {
 
         .scorecard{
             display: flex;
-            margin-top: 20px;
+            margin-top: 40px;
+            font-size: 15px;
+            border: 1px solid black;
 
             .col-item {
-                padding: 10px;
-                height: 50px;
-                width: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 7px;
+                height: 53px;
+                width: 53px;
                 border: 1px solid black;
-                text-align: center;
+                // text-align: center;
             }
             .row-title {
+                display: flex;
+                justify-content: flex-start;
                 font-weight: 700;
-                text-align: left;
-                width: 190px;
+                width: 188px;
             }
             .tee-title {
                 text-transform: capitalize;
+            }
+            .name-input {
+                width: 188px;
+            }
+            .out-col .col-item {
+                width: 68px;
+            }
+            .in-col .col-item {
+                width: 68px;
+            }
+            .initials-title {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 159px;
+                font-size: 12px;
+                font-weight: bold;
+                border: 1px solid black;
+                width: 40px;
+            }
+            .initials-cont {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .initials-input, .initials-empty {
+                text-align: center;
+                width: 40px;
+                height: 53px;
+                border: 1px solid black;
+                padding: 7px;
+            }
+            .score-input {
+                text-align: center;
             }
 
         }
