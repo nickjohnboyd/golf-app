@@ -14,8 +14,11 @@ body {
 
 .home .content {
   display: flex;
-  justify-content: center;
-  padding: 0 18px 18px 18px; }
+  flex-direction: column; }
+  .home .content .card-cont {
+    display: flex;
+    justify-content: center;
+    padding: 0 18px 18px 18px; }
   .home .content .all-courses {
     display: flex;
     flex-direction: column;
@@ -81,8 +84,10 @@ body {
     .home .content .scorecard .row-title {
       display: flex;
       justify-content: flex-start;
-      font-weight: 700;
+      font-weight: 900;
       width: 188px; }
+    .home .content .scorecard .player-name {
+      font-weight: 700; }
     .home .content .scorecard .tee-title {
       text-transform: capitalize; }
     .home .content .scorecard .name-input {

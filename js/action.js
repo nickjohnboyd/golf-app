@@ -106,20 +106,24 @@ function buildScorecard(id) {
 
     $(".content").html("");
     $(".content").append(`
-        <div class="scorecard">
-            <div class="row-titles">
-                <div class="row-title col-item">
-                    <div class="col-item-text">HOLE</div>
-                </div>
-                <div class="row-title col-item tee-title">
-                    <div class="col-item-text">${teeType}</div>
-                </div>
-                <div class="row-title col-item">
-                    <div class="col-item-text">Handicap</div>                
-                </div>
-                <div class="players"></div>
-                <div class="row-title col-item">
-                    <div class="col-item-text">Par</div>                
+        <div class="add-player">
+            <button class="add-player-btn btn btn-dark" onclick="addPlayer(${numPlayers})">Add Player</div>
+        <div class="card-cont">
+            <div class="scorecard">
+                <div class="row-titles">
+                    <div class="row-title col-item">
+                        <div class="col-item-text">HOLE</div>
+                    </div>
+                    <div class="row-title col-item tee-title">
+                        <div class="col-item-text">${teeType}</div>
+                    </div>
+                    <div class="row-title col-item">
+                        <div class="col-item-text">Handicap</div>                
+                    </div>
+                    <div class="players"></div>
+                    <div class="row-title col-item">
+                        <div class="col-item-text">Par</div>                
+                    </div>
                 </div>
             </div>
         </div>
@@ -311,16 +315,26 @@ function buildPlayers(numPlayers) {
     for(let i = 0; i < numPlayers; i++) {
         $(".players").append(`
             <div class="player" id="player${i}">
-                <input class="name-input col-item" type="text" placeholder="Add Player Name" onchange="addPlayerName(this.value, ${i})">
+                <input class="name-input col-item" type="text" placeholder="Add Player Name" onchange="addPlayerName(this.value, ${i}, ${numPlayers})">
             </div>
         `)
     }
 }
 
-function addPlayerName(name, i) {
-    if(name == ""){
-        return;
+function addPlayerName(name, i, numPlayers) {
+    if(i > 0) {
+        let nameArray = [];
+        for(let j = 0; j < numPlayers; j++){
+            let theName = $(`#player${j}`).find(".player-name").text();
+            nameArray.push(theName);
+        }
+        console.log(nameArray);
+        if(name == "" || nameArray.includes(name)) {
+            $(`#player${i}`).find(".name-input").css("background-color", "#ff5252");
+            return;
+        }
     }
+    
     $(`#player${i}`).html("");
     $(`#player${i}`).append(`
         <div class="row-title col-item">
@@ -330,13 +344,17 @@ function addPlayerName(name, i) {
     $(`#player${i + 1}`).find(".name-input").focus();
 }
 
+function addPlayer() {
+    
+}
+
 function replaceHeaderName(id) {
     getCourse(id).then(() => {
         $(".head-title").text(selectedCourse.data.name);
     })
 }
 
-function addScore(event, score, colNum, player) {
+function addScore(score, colNum, player) {
     if(score == "" || isNaN(Number(score))){
         return;
     }
@@ -352,9 +370,6 @@ function setAllScores(player) {
     for(let i = 0; i < 18; i++) {
         let theScore = $(`#col${i}p${player}`).val();
         theScore = Number(theScore);
-        // if(theScore.isNaN()){
-        //     return;
-        // }
 
         if(i < 9) {
             outScore += theScore;
