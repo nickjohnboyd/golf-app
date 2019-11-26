@@ -100,7 +100,6 @@ function buildScorecard(id) {
     let numPlayers = $(`#${id}`).find(".num-players-select").val();
 
     if(teeType == "empty" || numPlayers == "empty"){
-        console.log("empty alert");
         $(`#${id}`).find(".empty-select-alert").slideDown();
         return;
     }
@@ -212,7 +211,7 @@ function buildColItems(selectedCourse, colNum, numPlayers) {
     for(let i = 0; i < numPlayers; i++) {
         $(`#col${colNum}`).find(".score-input").append(`
             <div class="score">
-                <input type="text" class="score-input col-item score${i}" id="col${colNum}p${i}" onchange="addScore(event, this.value, ${colNum}, ${i})" placeholder="-" maxlength="2">
+                <input type="text" class="score-input col-item score${i}" id="col${colNum}p${i}" onchange="addScore(event, this.value, ${colNum}, ${i})" placeholder="" maxlength="2">
             </div>
         `)
     }
@@ -267,7 +266,7 @@ function buildEndColItems(selectedCourse, numPlayers) {
         <div class="col-item"></div>
         <div class="in-total"></div>
         <div class="col-item">
-            <div class="col-item-text">72</div>                
+            <div class="col-item-text">36</div>                
         </div>
     `);
 
@@ -328,22 +327,7 @@ function addPlayerName(name, i) {
             <div class="col-item-text player-name">${name}</div>                
         </div>
     `);
-    $(`#player${i + 1}`).find(".name-input").focus();            
-
-    // switch(event.which) {
-    //     case 13:
-    //         if(name == ""){
-    //             break;
-    //         }
-    //         $(`#player${i}`).html("");
-    //         $(`#player${i}`).append(`
-    //             <div class="row-title col-item">
-    //                 <div class="col-item-text">${name}</div>                
-    //             </div>
-    //         `);
-    //         $(`#player${i + 1}`).find(".name-input").focus();            
-    //         break;
-    // }
+    $(`#player${i + 1}`).find(".name-input").focus();
 }
 
 function replaceHeaderName(id) {
@@ -353,23 +337,12 @@ function replaceHeaderName(id) {
 }
 
 function addScore(event, score, colNum, player) {
-    if(score == ""){
+    if(score == "" || isNaN(Number(score))){
         return;
     }
     $(`#col${colNum}p${player}`).val(score);
     setAllScores(player);
     $(`#col${colNum}`).find(`.score${player + 1}`).focus();
-
-    // switch(event.which) {
-    //     case 13:
-    //         if(score == ""){
-    //             break;
-    //         }
-    //         $(`#col${colNum}p${player}`).val(score);
-    //         setAllScores(player);
-    //         $(`#col${colNum}`).find(`.score${player + 1}`).focus();
-    //         break;
-    // }
 }
 
 function setAllScores(player) {
