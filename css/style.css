@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Nunito', sans-serif; }
+  font-family: 'Montserrat', sans-serif; }
 
 .home .header {
   display: flex;
@@ -16,9 +16,22 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 30px; }
-  .home .content .add-player {
+  align-items: center;
+  padding-top: 40px; }
+  .home .content .scorecard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 1373px; }
+    .home .content .scorecard-header .end-message .end-msg-text {
+      padding: 5px 15px;
+      border-radius: 5px; }
+    .home .content .scorecard-header .end-message .bad-msg {
+      background-color: #dc3545; }
+    .home .content .scorecard-header .end-message .good-msg {
+      background-color: #28a745; }
+    .home .content .scorecard-header .end-message .neutral-msg {
+      background-color: #ffc107; }
   .home .content .card-cont {
     display: flex;
     justify-content: center;
@@ -122,3 +135,5 @@ body {
       padding: 7px; }
     .home .content .scorecard .score-input {
       text-align: center; }
+    .home .content .scorecard .par {
+      background-color: #e1ad01; }

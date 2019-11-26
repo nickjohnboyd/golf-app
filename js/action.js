@@ -94,8 +94,7 @@ function showCourseOptions(id) {
 
 
 
-
-
+// Scorecard Page
 function buildInitialCard(id) {
     let numPlayers = $(`#${id}`).find(".num-players-select").val();
 
@@ -104,16 +103,24 @@ function buildInitialCard(id) {
 
 function buildScorecard(id, numPlayers) {
     let teeType = $(`#${id}`).find(".tee-type-select").val();
+    let teeColor;
 
     if(teeType == "empty" || numPlayers == "empty"){
         $(`#${id}`).find(".empty-select-alert").slideDown();
         return;
     }
 
+    // switch(teeType){
+    //     case "pro":
+    //         teeColor = 
+    // }
+
     $(".content").html("");
     $(".content").append(`
-        <div class="add-player">
-            <button class="add-player-btn btn btn-dark" onclick="addPlayer(${id}, ${numPlayers})">Add Player</div>
+        <div class="scorecard-header">
+            <button class="add-player-btn btn btn-dark" onclick="addPlayer(${id}, ${numPlayers})">Add Player</button>
+            <div class="end-message"></div>
+        </div>
         <div class="card-cont">
             <div class="scorecard">
                 <div class="row-titles">
@@ -127,7 +134,7 @@ function buildScorecard(id, numPlayers) {
                         <div class="col-item-text">Handicap</div>                
                     </div>
                     <div class="players"></div>
-                    <div class="row-title col-item">
+                    <div class="row-title col-item par">
                         <div class="col-item-text">Par</div>                
                     </div>
                 </div>
@@ -145,6 +152,7 @@ function buildScorecard(id, numPlayers) {
 
 
 
+//Build Scorecard Functions
 function buildCol(id, numPlayers) {
     getCourse(id).then(() => {
         console.log(selectedCourse);
@@ -213,7 +221,7 @@ function buildColItems(selectedCourse, colNum, numPlayers) {
             <div class="col-item-text">${theHole.hcp}</div>        
         </div>
         <div class="score-input"></div>
-        <div class="hcp col-item">
+        <div class="par col-item">
             <div class="col-item-text">${theHole.par}</div>     
         </div>
     `);
@@ -240,7 +248,7 @@ function buildMidColItems(selectedCourse, numPlayers) {
         </div>
         <div class="col-item"></div>
         <div class="out-total"></div>
-        <div class="col-item">
+        <div class="col-item par">
             <div class="col-item-text">36</div>                
         </div>
     `);
@@ -258,7 +266,7 @@ function buildMidColItems(selectedCourse, numPlayers) {
         `);
     }
     $(".player-initials").append(`
-            <div class="initials-empty"></div>
+            <div class="initials-empty par"></div>
     `);
 }
 
@@ -275,7 +283,7 @@ function buildEndColItems(selectedCourse, numPlayers) {
         </div>
         <div class="col-item"></div>
         <div class="in-total"></div>
-        <div class="col-item">
+        <div class="col-item par">
             <div class="col-item-text">36</div>                
         </div>
     `);
@@ -301,7 +309,7 @@ function buildEndColItems(selectedCourse, numPlayers) {
         </div>
         <div class="col-item"></div>
         <div class="overall-total"></div>
-        <div class="col-item">
+        <div class="col-item par">
             <div class="col-item-text">72</div>                
         </div>
     `);
@@ -317,6 +325,7 @@ function buildEndColItems(selectedCourse, numPlayers) {
 
 
 
+// Player Functions
 function buildPlayers(numPlayers) {
     for(let i = 0; i < numPlayers; i++) {
         $(".players").append(`
@@ -362,17 +371,14 @@ function addPlayer(id, numPlayers) {
     buildScorecard(id, numPlayers);
 }
 
-function replaceHeaderName(id) {
-    getCourse(id).then(() => {
-        $(".head-title").text(selectedCourse.data.name);
-    })
-}
 
+
+// Scoring Functions
 function addScore(score, colNum, player) {
     console.log("add score");
     console.log("score " + score);
     if(score == "" || isNaN(Number(score))){
-        return;
+        score = 0;
     }
     console.log(score);
     $(`#col${colNum}p${player}`).val(score);
@@ -402,4 +408,40 @@ function setAllScores(player) {
         $(`#p${player}TotalScore`).text(totalScore);
 
     }
+
+    if($(`#col${17}p${player}`).val() > 0) {
+        let theName = $(`#player${player}`).find(".player-name").text();
+
+        if(theName == ""){
+            theName = "BLANK NAMED PERSON";
+        }
+
+        $(".end-message").html("");
+
+        let courseScore = totalScore - 72;
+        if(courseScore > 0){
+            $(".end-message").append(`
+                <div class="end-msg-text bad-msg">Ouch!  ${theName} got +${courseScore} overall!  Might need some more practice!</div>
+            `)
+        }
+        else if(courseScore < 0){
+            $(".end-message").append(`
+                <div class="end-msg-text good-msg">Is that Tiger Woods I see?!  ${theName} got ${courseScore} overall!  We'll see ${theName} at the Masters!</div>
+            `)            
+        } 
+        else {
+            $(".end-message").append(`
+                <div class="end-msg-text neutral-msg">Perfectly on par.  ${theName} got +${courseScore} overall.  Nothing to write home about.</div>
+            `)
+        }
+    }
+}
+
+
+
+// Misc Functions
+function replaceHeaderName(id) {
+    getCourse(id).then(() => {
+        $(".head-title").text(selectedCourse.data.name);
+    })
 }
